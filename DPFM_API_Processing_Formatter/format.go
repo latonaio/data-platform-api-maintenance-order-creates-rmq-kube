@@ -16,6 +16,27 @@ func ConvertToObjectListItemUpdates(header dpfm_api_input_reader.Header, ObjectL
 	data := ObjectListItem
 
 	return &ObjectListItemUpdates{
+		MaintenanceOrder:           data.MaintenanceOrder,
 		MaintenanceOrderObjectList: data.MaintenanceOrderObjectList,
+		MaintenanceObjectListItem:  data.MaintenanceObjectListItem,
+	}
+}
+
+func ConvertToOperationUpdates(header dpfm_api_input_reader.Header, Operation dpfm_api_input_reader.Operation) *OperationUpdates {
+	data := Operation
+
+	return &OperationUpdates{
+		MaintenanceOrder:             data.MaintenanceOrder,
+		MaintenanceOrderOperation:    data.MaintenanceOrderOperation,
+		MaintenanceOrderSubOperation: data.MaintenanceOrderSubOperation,
+	}
+}
+
+func ConvertToOperationComponentUpdates(header dpfm_api_input_reader.Header, OperationComponent dpfm_api_input_reader.OperationComponent) *OperationComponentUpdates {
+	data := OperationComponent
+
+	return &OperationComponentUpdates{
+		MaintenanceOrder:          data.MaintenanceOrder,
+		MaintenanceOrderComponent: data.MaintenanceOrderComponent,
 	}
 }

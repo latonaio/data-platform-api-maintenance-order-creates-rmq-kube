@@ -34,6 +34,36 @@ func ConvertToObjectListItemCreates(sdc *dpfm_api_input_reader.SDC) (*[]ObjectLi
 	return &items, nil
 }
 
+func ConvertToOperationCreates(sdc *dpfm_api_input_reader.SDC) (*[]Operation, error) {
+	items := make([]Operation, 0)
+
+	for _, data := range sdc.Header.Operation {
+		item, err := TypeConverter[*Operation](data)
+		if err != nil {
+			return nil, err
+		}
+
+		items = append(items, *item)
+	}
+
+	return &items, nil
+}
+
+func ConvertToOperationComponentCreates(sdc *dpfm_api_input_reader.SDC) (*[]OperationComponent, error) {
+	items := make([]OperationComponent, 0)
+
+	for _, data := range *sdc.Header.OperationComponent {
+		item, err := TypeConverter[*OperationComponent](data)
+		if err != nil {
+			return nil, err
+		}
+
+		items = append(items, *item)
+	}
+
+	return &items, nil
+}
+
 func ConvertToHeaderUpdates(headerData dpfm_api_input_reader.Header) (*Header, error) {
 	data := headerData
 
@@ -49,12 +79,42 @@ func ConvertToObjectListItemUpdates(itemUpdates *[]dpfm_api_processing_formatter
 	items := make([]ObjectListItem, 0)
 
 	for _, data := range *itemUpdates {
-		item, err := TypeConverter[*ObjectListItem](data)
+		objectListItem, err := TypeConverter[*ObjectListItem](data)
 		if err != nil {
 			return nil, err
 		}
 
-		items = append(items, *item)
+		items = append(items, *objectListItem)
+	}
+
+	return &items, nil
+}
+
+func ConvertToOperationUpdates(itemUpdates *[]dpfm_api_processing_formatter.OperationUpdates) (*[]Operation, error) {
+	items := make([]Operation, 0)
+
+	for _, data := range *itemUpdates {
+		operation, err := TypeConverter[*Operation](data)
+		if err != nil {
+			return nil, err
+		}
+
+		items = append(items, *operation)
+	}
+
+	return &items, nil
+}
+
+func ConvertToOperationComponentUpdates(itemUpdates *[]dpfm_api_processing_formatter.OperationComponentUpdates) (*[]OperationComponent, error) {
+	items := make([]OperationComponent, 0)
+
+	for _, data := range *itemUpdates {
+		operationComponent, err := TypeConverter[*OperationComponent](data)
+		if err != nil {
+			return nil, err
+		}
+
+		items = append(items, *operationComponent)
 	}
 
 	return &items, nil

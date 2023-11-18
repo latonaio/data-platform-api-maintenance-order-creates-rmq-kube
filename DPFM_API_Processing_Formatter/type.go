@@ -5,6 +5,18 @@ type HeaderUpdates struct {
 }
 
 type ObjectListItemUpdates struct {
-	MaintenanceOrder           int `json:"MaintenanceOrder"`
-	MaintenanceOrderObjectList int `json:"MaintenanceOrderObjectList"`
+	MaintenanceOrder           string `json:"MaintenanceOrder"`
+	MaintenanceOrderObjectList int    `json:"MaintenanceOrderObjectList"`
+	MaintenanceObjectListItem  int    `json:"MaintenanceObjectListItem"`
+}
+
+type OperationUpdates struct {
+	MaintenanceOrder             string `json:"MaintenanceOrder"`
+	MaintenanceOrderOperation    string `json:"MaintenanceOrderOperation"`
+	MaintenanceOrderSubOperation string `json:"MaintenanceOrderSubOperation"`
+}
+
+type OperationComponentUpdates struct {
+	MaintenanceOrder          string `json:"MaintenanceOrder"`
+	MaintenanceOrderComponent string `json:"MaintenanceOrderComponent"`
 }
